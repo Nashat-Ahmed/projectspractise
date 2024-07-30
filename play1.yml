@@ -1,0 +1,20 @@
+# webserver.yml
+---
+- name: Deploy and start Nginx web server
+  hosts: all 
+  become: yes
+  tasks:
+    - name: Ensure Nginx is installed
+      apt:
+        name: nginx
+        state: present
+      when: ansible_os_family == 'debian'
+
+    - name: Ensure Nginx is installed
+      yum:
+        name: nginx
+        state: present
+      when: ansible_os_family == 'RedHat'
+
+   
+
