@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+ name: two-containers
+spec:
+ restartPolicy: Never
+ volumes:
+ - name: shared-area
+   emptyDir: {}
+ containers:
+ - name: nginx-container
+   image: nginx
+   volumeMounts:
+   - name: shared-area
+     mountPath: /usr/share/nginx/html
+ - name: ubuntu-container
+   image: ubuntu
+   volumeMounts:
+   - name: shared-area
+     mountPath: /pod-area
+   command: ["/bin/sh"]
+   args: ["-c","echo hello from nashaat container > /pod-area/index.html"]
