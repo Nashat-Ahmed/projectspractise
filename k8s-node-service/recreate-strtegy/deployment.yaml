@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: deployment
+metadata:
+  name: recreate-deployment
+  labels: 
+    app: webserver
+spec:
+ replicas: 5
+ selector: 
+   matchLabels:
+     app: webserver
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: webserver
+    spec:
+      containers:
+      - name: webserver
+        image: nashaat111/k8s-webserver:1.2.0
+        ports:
+        - containerPort: 3000

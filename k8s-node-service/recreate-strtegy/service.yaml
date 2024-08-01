@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: service
+metadata: 
+  name: recreate-deployment
+spec:
+  selector:
+    app: webserver
+  ports:
+    - port: 80
+      targetPort: 3000
+  type: NodePort
